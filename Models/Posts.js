@@ -5,3 +5,5 @@ const PostSchema = new Schema({
   like: { type: Number, default: true },
   users: [String],
 });
+
+module.exports = mongoose.model('Post', PostSchema);
