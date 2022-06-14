@@ -4,10 +4,11 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const methodOverride = require('method-override');
-const bodyParse = require('body-parser');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const ExpressError = require('./utils/ExpressError');
+const routes = require('./routes/posts');
 
 const dbUrl = process.env.DB_URL;
 
@@ -22,6 +23,13 @@ db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', () => {
   console.log('database connected');
 });
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride('_method'));
+app.use(bodyParser.json());
+
+app.use('/route', routse);
+
 app.get('/', async (req, res) => {
   res.send('Hello');
 });
